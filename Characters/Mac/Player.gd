@@ -1,40 +1,48 @@
 extends KinematicBody2D
 
-export (int) var speed = 4000
+export (int) var speed = 50
+onready var animationSprite = $Sprite
 
-onready var animationSprite = $AnimatedSprite
-
-var velocity = Vector2()
+var velocity := Vector2.ZERO
+var last_direction = Vector2(0, 1) # Saves direction to know where they are facing
 
 func _physics_process(delta):
-	get_input_vector()
-	var animation = "Walk" + direction()
-	animationSprite.play(animation)
-	
-	velocity = velocity * delta
-	
-	velocity = move_and_slide(velocity)
+	move(delta)
 
-func get_input_vector():
-	velocity = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-	if Input.is_action_pressed('ui_left'):
-		velocity.x -= 1
-	if Input.is_action_pressed('ui_down'):
-		velocity.y += 1
-	if Input.is_action_pressed('ui_up'):
-		velocity.y -= 1
-	velocity = velocity.normalized() * speed
+func move(delta: float) -> void:
+	var direction := Vector2.ZERO
+	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	direction = direction.normalized()
+	var movement = speed * direction * delta
+	
+	move_and_collide(movement)
+	animates_player(direction)
 
-func direction():
-	if Input.is_action_pressed("ui_right"):
-		return "Right"
-	elif Input.is_action_pressed('ui_left'):
-		return "Left"
-	elif Input.is_action_pressed('ui_down'):
-		return "Down"
-	elif Input.is_action_pressed('ui_up'):
-		return "Up"
+func animates_player(direction: Vector2) -> void:
+	if direction != Vector2.ZERO:
+		last_direction = 0.5 * last_direction + 0.5 * direction
+
+		var animation = "Walk" + get_animation_direction(last_direction)
+
+		$Sprite.frames.set_animation_speed(animation, 2 + 8 * last_direction.length())
+		$Sprite.play(animation)
+
 	else:
-		return "Idle"
+		var animation = "Idle" + get_animation_direction(last_direction)
+		$Sprite.play(animation)
+
+func get_animation_direction(direction: Vector2) -> String:
+	var norm_direction = direction.normalized()
+	
+	if norm_direction.y >= 0.707:
+		return "Down"
+	elif norm_direction.y <= -0.707:
+		return "Up"
+	elif norm_direction.x <= -0.707:
+		return "Left"
+	elif norm_direction.x >= 0.707:
+		return "Right"
+	
+	return "Down"
