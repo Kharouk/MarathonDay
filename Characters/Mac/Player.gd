@@ -1,18 +1,21 @@
 extends KinematicBody2D
 
-export (int) var speed = 100
+export (int) var speed = 4000
 
-onready var animationPlayer = $Mac/AnimationPlayer
+onready var animationSprite = $AnimatedSprite
+
 var velocity = Vector2()
 
 func _physics_process(delta):
-	get_input()
+	get_input_vector()
 	var animation = "Walk" + direction()
-	animationPlayer.play(animation)
+	animationSprite.play(animation)
+	
+	velocity = velocity * delta
 	
 	velocity = move_and_slide(velocity)
 
-func get_input():
+func get_input_vector():
 	velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1

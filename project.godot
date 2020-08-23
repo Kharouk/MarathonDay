@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Button",
+"class": "ChoiceButton",
+"language": "GDScript",
+"path": "res://addons/radmatt.DialogueSystem2/other/Choices/_choice_button.gd"
+}, {
+"base": "Control",
+"class": "Choices",
+"language": "GDScript",
+"path": "res://addons/radmatt.DialogueSystem2/other/Choices/Choices.gd"
+}, {
+"base": "Control",
+"class": "Message",
+"language": "GDScript",
+"path": "res://addons/radmatt.DialogueSystem2/other/Message.gd"
+}, {
+"base": "Control",
+"class": "Text",
+"language": "GDScript",
+"path": "res://addons/radmatt.DialogueSystem2/custom_text_node/Text.gd"
+} ]
 _global_script_class_icons={
-
+"ChoiceButton": "res://addons/radmatt.DialogueSystem2/icons/ChoiceButton.svg",
+"Choices": "res://addons/radmatt.DialogueSystem2/icons/Choices.svg",
+"Message": "res://addons/radmatt.DialogueSystem2/icons/Message.svg",
+"Text": "res://addons/radmatt.DialogueSystem2/icons/Text.svg"
 }
 
 [application]
@@ -18,6 +41,10 @@ _global_script_class_icons={
 config/name="Basic Runner"
 run/main_scene="res://Scenes/World.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Dialogue="*res://addons/radmatt.DialogueSystem2/Dialogue.tscn"
 
 [display]
 
@@ -30,7 +57,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "wakatime" )
+enabled=PoolStringArray( "radmatt.DialogueSystem2", "wakatime" )
 
 [importer_defaults]
 
@@ -53,6 +80,42 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+continue_dialogue={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [rendering]
