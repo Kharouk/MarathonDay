@@ -250,6 +250,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
+dialogue_file = "res://Dialogue/emily_is_away_too.json"
 
 [node name="Sprite" type="Sprite" parent="Emily"]
 position = Vector2( 0, 1 )
