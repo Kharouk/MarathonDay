@@ -6,6 +6,9 @@ onready var animationSprite = $Sprite
 var velocity := Vector2.ZERO
 var last_direction = Vector2(0, 1) # Saves direction to know where they are facing
 
+func _input(event):
+	print(event)
+
 func _physics_process(delta):
 	move(delta)
 
