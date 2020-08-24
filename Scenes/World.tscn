@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Characters/Mac/NPC_5_spritesheet_resized.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Mac/Player.gd" type="Script" id=2]
 [ext_resource path="res://Environment/TS_Dirt.png" type="Texture" id=3]
 [ext_resource path="res://Characters/Emily/NPC_1_spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://Characters/Emily/Emily.gd" type="Script" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "dirt_block"
@@ -245,6 +246,7 @@ tile_data = PoolIntArray( 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 
 "NPC",
 ]]
 position = Vector2( 181, 76 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -270,3 +272,7 @@ shape = SubResource( 3 )
 [node name="Sprite" type="AnimatedSprite" parent="Player"]
 frames = SubResource( 24 )
 animation = "IdleDown"
+
+[node name="Raycast2D" type="RayCast2D" parent="Player"]
+enabled = true
+cast_to = Vector2( 0, 8 )

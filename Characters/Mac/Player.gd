@@ -2,12 +2,16 @@ extends KinematicBody2D
 
 export (int) var speed = 50
 onready var animationSprite = $Sprite
+onready var raycast = $Raycast2D
 
 var velocity := Vector2.ZERO
 var last_direction = Vector2(0, 1) # Saves direction to know where they are facing
 
 func _input(event):
-	print(event)
+	if event.is_action_pressed("continue_dialogue"):
+		var target : StaticBody2D = raycast.get_collider()
+		if target and target.is_in_group("NPC"):
+			target.talk()
 
 func _physics_process(delta):
 	move(delta)
@@ -20,6 +24,9 @@ func move(delta: float) -> void:
 	direction = direction.normalized()
 	var movement = speed * direction * delta
 	
+	if direction != Vector2.ZERO:
+		raycast.cast_to = direction.normalized() * 8
+		
 	move_and_collide(movement)
 	animates_player(direction)
 
